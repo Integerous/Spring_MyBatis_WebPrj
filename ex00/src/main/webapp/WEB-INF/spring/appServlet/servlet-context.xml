@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<!-- component-scan은  패키지"com.ryemha.web" 내부의 클래스들을 조사한다는 것 -->
-	<context:component-scan base-package="com.ryemha.web" />
+	<context:component-scan base-package="com.ryemha.test" />
 	
 	
 	

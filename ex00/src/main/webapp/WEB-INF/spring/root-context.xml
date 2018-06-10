@@ -14,7 +14,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 		
-
 <!-- DataSource는 JDBC의 커넥션을 처리하는 기능을 가지고있기 때문에 데이터베이스와 연동 작업에 반드시 필요-->		
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
@@ -43,7 +42,6 @@
 	</bean>
 
 
-
 <!-- SqlSessionTemplate은 MyBatis의 SqlSession인터페이스를 구현한 클래스로
 기본적인 트랜잭션 관리나 쓰레드 처리의 안정성 등을 보장해주고, 데이터베이스의 연결과 종료를 책임진다.
 SqlSessionTemplate은 SqlSessionFactory를 생성자로 주입해서 설정한다. -->
@@ -53,9 +51,11 @@ SqlSessionTemplate은 SqlSessionFactory를 생성자로 주입해서 설정한�
 	</bean>
 
 
-
 <!-- MemberDAOImpl에 @Repository가 설정되더라도 스프링에서 해당 패키지를 스캔하지 않으면 스프링의 bean으로 등록되지 못하기 때문에 아래와 같이 설정해준다. -->
 <context:component-scan base-package="com.ryemha.persistence"/>
+
+
+
 
 </beans>
 <!-- root-context.xml은 스프링과 관련된 설정! 웹 자원과 관련되지 않은 모든 자원의 설정을 위해서 존재한다.

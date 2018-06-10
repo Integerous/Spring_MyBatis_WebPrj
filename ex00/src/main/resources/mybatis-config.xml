@@ -4,6 +4,17 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+<!-- typeAliases 사용하면 
+	XML Mapper를 사용하며 매번 parameterType이나 resultType을 패키지까지 포함된 클래스명을 작성하지 않고 
+	클래스의 이름에서 com.ryemha.domain은 생략하고 표현가능 -->
+<typeAliases>
+	<package name="com.ryemha.domain"/>
+</typeAliases>
+ 
+ 
+ 
+ 
  <!--  <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
