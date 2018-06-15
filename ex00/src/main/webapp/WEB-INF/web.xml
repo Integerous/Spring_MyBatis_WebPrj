@@ -33,7 +33,7 @@
 	<!-- 스프링에서 제공하는 한글처리 필터 -->
 	<filter>
 		<filter-name>encoding</filter-name>
-		<filter-class>org.springframework.web.filterCharacterEncodingFilter</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		
 		<init-param>
 			<param-name>encoding</param-name>

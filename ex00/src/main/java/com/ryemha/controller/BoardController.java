@@ -28,7 +28,7 @@ public class BoardController {
 		logger.info("register get........");
 	}
 	
-	@RequestMapping(value ="/register", method = RequestMethod.GET)
+	@RequestMapping(value ="/register", method = RequestMethod.POST)
 	public String registPOST(BoardVO board, /*Model model*/ RedirectAttributes rttr)throws Exception{
 		
 		logger.info("regist post........");
@@ -48,7 +48,7 @@ public class BoardController {
 	public void listAll(Model model)throws Exception{
 		
 		logger.info("show all list...............");
-		
+		model.addAttribute("list", service.listAll());
 	}
 
 }
