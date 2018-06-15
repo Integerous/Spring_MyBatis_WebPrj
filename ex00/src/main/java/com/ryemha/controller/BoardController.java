@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ryemha.domain.BoardVO;
 import com.ryemha.service.BoardService;
@@ -28,15 +29,26 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value ="/register", method = RequestMethod.GET)
-	public String registPOST(BoardVO board, Model model)throws Exception{
+	public String registPOST(BoardVO board, /*Model model*/ RedirectAttributes rttr)throws Exception{
 		
 		logger.info("regist post........");
 		logger.info(board.toString());
 		
 		service.regist(board);
-		model.addAttribute("result", "success");
 		
-		return "/board/success";
+		//model.addAttribute("result", "success");
+		rttr.addFlashAttribute("msg", "success");
+		//addFlashAttribute()는 브라우저까지 전송되기는 하지만 URI 상에는 보이지 않는 숨겨진 데이터의 형태로 전달된다.
+		
+		//return "/board/success";
+		return "redirect:/board/listAll";
 	}
 	
+	@RequestMapping(value="/listAll", method= RequestMethod.GET)
+	public void listAll(Model model)throws Exception{
+		
+		logger.info("show all list...............");
+		
+	}
+
 }
