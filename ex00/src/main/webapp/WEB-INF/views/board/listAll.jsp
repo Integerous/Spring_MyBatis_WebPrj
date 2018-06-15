@@ -21,10 +21,10 @@
 			<th style="width: 40px">VIEWCNT</th>
 		</tr>
 		
-		<c:forEach var="boardVO" items="{list}">
+		<c:forEach var="boardVO" items="${list}">
 		
 		<tr>
-			<td> ${boardVO.bno}</td>
+			<td>${boardVO.bno}</td>
 			<td><a href=''>${boardVO.title}</a></td>
 			<td>${boardVO.writer}</td>
 			<td> <fmt:formatDate pattern="yyyy-MM-dd HH:mm"
