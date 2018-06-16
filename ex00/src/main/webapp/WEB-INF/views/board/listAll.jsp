@@ -1,16 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
+<%@include file="../include/header.jsp" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
 	
 	<table class="table table-bordered">
 		<tr>
@@ -25,7 +19,7 @@
 		
 		<tr>
 			<td>${boardVO.bno}</td>
-			<td><a href=''>${boardVO.title}</a></td>
+			<td><a href='/board/read?bno=${boardVO.bno}'>${boardVO.title}</a></td>
 			<td>${boardVO.writer}</td>
 			<td> <fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 				value="${boardVO.regdate}"/> </td>
@@ -33,14 +27,14 @@
 		</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+
+<%@include file="../include/footer.jsp" %>
 
 <script>
 	var result = '${msg}';
 	
 	if(result == 'success'){
-		alert("Ã³¸®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		alert("ì²˜ë¦¬ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 
 </script>
