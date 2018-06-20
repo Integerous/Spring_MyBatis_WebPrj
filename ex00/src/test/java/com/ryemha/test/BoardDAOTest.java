@@ -1,5 +1,7 @@
 package com.ryemha.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -10,9 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ryemha.domain.BoardVO;
-import com.ryemha.domain.MemberVO;
 import com.ryemha.persistence.BoardDAO;
-import com.ryemha.persistence.MemberDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -55,4 +55,23 @@ public class BoardDAOTest {
 		dao.delete(1);
 	}
 	
+	
+	@Test
+	public void testListPage()throws Exception{
+		
+		int page = 3;
+		
+		List<BoardVO> list = dao.listPage(page);
+		
+		for(BoardVO boardVO : list) {
+			logger.info(boardVO.getBno() + ":" + boardVO.getTitle());
+		}
+		
+	}
+	
+	
 }
+
+
+
+
