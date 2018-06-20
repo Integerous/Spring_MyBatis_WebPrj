@@ -3,6 +3,7 @@ package com.ryemha.persistence;
 import java.util.List;
 
 import com.ryemha.domain.BoardVO;
+import com.ryemha.domain.Criteria;
 
 public interface BoardDAO {
 
@@ -18,4 +19,8 @@ public interface BoardDAO {
 	
 	//페이징 처리를 위해
 	public List<BoardVO> listPage(int page)throws Exception;
+	
+	// listCriteria()는 Criteria 객체를 파라미터로 전달받고,
+	// 필요한 getPageStart()와 getPerPageNum() 메소드를 호출한 결과를 사용하게 된다.
+	public List<BoardVO> listCriteria(Criteria cri)throws Exception;
 }

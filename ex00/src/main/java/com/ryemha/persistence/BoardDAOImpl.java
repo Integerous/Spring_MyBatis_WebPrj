@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.ryemha.domain.BoardVO;
+import com.ryemha.domain.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -61,6 +63,13 @@ public class BoardDAOImpl implements BoardDAO {
 		page = (page - 1) * 10;
 		
 		return session.selectList(namespace + ".listPage", page);
+	}
+
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		
+		return session.selectList(namespace+".listCriteria", cri);
+		
 	}
 
 }
