@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ryemha.domain.BoardVO;
 import com.ryemha.domain.Criteria;
+import com.ryemha.domain.PageMaker;
 import com.ryemha.service.BoardService;
 
 @Controller
@@ -103,6 +104,21 @@ public class BoardController {
 		
 		model.addAttribute("list", service.listCriteria(cri));
 	}
+	
+	@RequestMapping(value="/listPage", method = RequestMethod.GET)
+	public void listPage(Criteria cri, Model model)throws Exception{
+		
+		logger.info(cri.toString());
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(131);
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+	}
+	
 
 }
 
