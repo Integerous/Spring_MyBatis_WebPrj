@@ -1,5 +1,8 @@
 package com.ryemha.domain;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 
 	private int totalCount;
@@ -10,6 +13,20 @@ public class PageMaker {
 	private int displayPageNum = 10;
 	private Criteria cri;
 	
+	
+	//현재 목록 페이지의 경우 모든 정보는 Criteria에 있기 때문에 MakeQuery() 메소드 추가
+	public String makeQuery(int page) {
+		
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		
+		return uriComponents.toUriString();
+	}
+	
+	
 	public void setCri(Criteria cri) {
 		this.cri = cri;
 	}
@@ -19,6 +36,7 @@ public class PageMaker {
 		
 		calcData();
 	}
+	
 	
 	private void calcData() {
 		
