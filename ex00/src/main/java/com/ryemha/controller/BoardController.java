@@ -59,8 +59,9 @@ public class BoardController {
 	}
 	
 	// 조회
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("bno") int bno, Model model) throws Exception{
+	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	public void read(@RequestParam("bno") int bno, Model model
+					, @ModelAttribute("cri") Criteria cri) throws Exception{
 		
 		model.addAttribute(service.read(bno));
 		//addAttribute()에 이름없이 데이터를 넣으면 자동으로 클래스 명을 사용하되 첫글자만 소문자로 바뀐다.
@@ -69,13 +70,16 @@ public class BoardController {
 	
 	// 삭제
 	@RequestMapping(value="remove", method=RequestMethod.POST)
-	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception{
+	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr
+					, Criteria cri) throws Exception{
 		
 		service.remove(bno);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/board/listAll";	
+		return "redirect:/board/listPage";	
 	}
 	
 	// 수정폼
@@ -122,7 +126,30 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value ="/modifyPage", method = RequestMethod.GET)
+	public void modifyPagingGET(@RequestParam("bno") int bno
+			, @ModelAttribute("cri") Criteria cri, Model model)throws Exception{
+		
+		model.addAttribute(service.read(bno));
+	
+	}
 
+	@RequestMapping(value="/modifyPage", method= RequestMethod.POST)
+	public String modifyPagingPOST(BoardVO board, Criteria cri
+					, RedirectAttributes rttr)throws Exception{
+		
+		service.modify(board);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addFlashAttribute("msg", "success");
+		
+		return	"redirect:/board/listPage";
+	}
+	
+	
+	
+	
 }
 
 
