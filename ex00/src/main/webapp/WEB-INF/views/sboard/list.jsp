@@ -124,7 +124,8 @@
 			
 			$('#searchBtn').on("click", function(event){
 				
-				self.location ="list" + '${pageMaker.makeQuery(1)}'
+				self.location ="list" 
+								+ '${pageMaker.makeQuery(1)}'
 								+ "&searchType="
 								+ $("select option:selected").val()
 								+ "&keyword=" + encodeURIComponent($('#keywordInput').val());

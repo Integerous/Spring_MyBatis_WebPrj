@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ryemha.domain.BoardVO;
 import com.ryemha.domain.Criteria;
+import com.ryemha.domain.SearchCriteria;
 
 public interface BoardDAO {
 
@@ -27,5 +28,14 @@ public interface BoardDAO {
 	
 	// totalCount 반환 할 수 있도록
 	public int countPaging(Criteria cri)throws Exception;
+	
+	
+	//검색과 페이징 둘 다 처리하기 위해서 SearchCriteria를 파라미터로 받음
+	public List<BoardVO> listSearch(SearchCriteria cri)throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri)throws Exception;
+	
+	
+	
 	
 }

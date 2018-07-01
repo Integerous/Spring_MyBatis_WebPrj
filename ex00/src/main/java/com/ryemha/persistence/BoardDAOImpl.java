@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.ryemha.domain.BoardVO;
 import com.ryemha.domain.Criteria;
+import com.ryemha.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -78,4 +79,25 @@ public class BoardDAOImpl implements BoardDAO {
 		return session.selectOne(namespace+".countPaging", cri);
 	}
 
+	
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+		
+		return session.selectList(namespace + ".listSearch", cri);
+	}
+
+	
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+
+		return session.selectOne(namespace + ".listSearchCount", cri);
+	}
+	
+	
+
 }
+
+
+
+
+
