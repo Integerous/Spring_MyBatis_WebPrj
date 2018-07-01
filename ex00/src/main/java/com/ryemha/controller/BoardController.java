@@ -45,7 +45,7 @@ public class BoardController {
 		//model.addAttribute("result", "success");
 		rttr.addFlashAttribute("msg", "success");
 		//addFlashAttribute()는 브라우저까지 전송되기는 하지만 URI 상에는 보이지 않는 숨겨진 데이터의 형태로 전달된다.
-		
+	
 		//return "/board/success";
 		return "redirect:/board/listAll";
 	}
