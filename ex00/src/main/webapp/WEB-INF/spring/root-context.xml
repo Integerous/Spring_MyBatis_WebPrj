@@ -20,11 +20,11 @@
 	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"/> -->
 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 	
-	<property name="url" value="jdbc:log4jdbc:mysql://ryemha.cgtz5bon0h1u.ap-northeast-2.rds.amazonaws.com:3306/book_ex?useSSL=false"/>
+	<property name="url" value="jdbc:mysql://127.0.0.1:3306/ryemha"/>
 								<!-- log4jdbc 추가됌 -->
 								
-	<property name="username" value="rhep0820"/>
-	<property name="password" value="Tnqkr0820!"/>
+	<property name="username" value="ryan"/>
+	<property name="password" value="0820"/>
 	</bean>
 
 
