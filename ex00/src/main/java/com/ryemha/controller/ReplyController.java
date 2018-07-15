@@ -1,6 +1,8 @@
 package com.ryemha.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ryemha.domain.Criteria;
+import com.ryemha.domain.PageMaker;
 import com.ryemha.domain.ReplyVO;
 import com.ryemha.service.ReplyService;
 
@@ -93,6 +97,42 @@ public class ReplyController {
 		return entity;
 	}
 	
+	
+	// Ajax로 호출될 것이므로  Model을 사용하지 못한다.
+	// 전달해야 하는 데이터들을 담기 위해서 Map 타입의 객체를 별도로 생성해야 한다.
+	// 화면으로 전달되는 Map 데이터는 페이징 처리된 댓글의 목록(list)과 PageMaker 클래스의 객체를 담는다.
+	@RequestMapping(value = "/{bno}/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listPage(
+			@PathVariable("bno") Integer bno,
+			@PathVariable("page") Integer page) {
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(page);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<ReplyVO> list = service.listReplyPage(bno, cri);
+			
+			map.put("list", list);
+			
+			int replyCount = service.count(bno);
+			pageMaker.setTotalCount(replyCount);
+			
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 	
 	
 }
