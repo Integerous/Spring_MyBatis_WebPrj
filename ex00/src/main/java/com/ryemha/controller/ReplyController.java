@@ -22,13 +22,13 @@ public class ReplyController {
 	@Inject
 	private ReplyService service;
 	
-	@RequestMapping(value="", method= RequestMethod.GET)
+	@RequestMapping(value="", method= RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody ReplyVO vo) {
 		
 		ResponseEntity<String> entity = null;
 		try {
 			service.addReply(vo);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -53,6 +53,8 @@ public class ReplyController {
 	}
 	
 	// REST 방식에서  update 작업은 PUT, PATCH 방식을 이용해서 처리한다.
+	// 전체 데이터를 수정하는 경우 = PUT 사용
+	// 일부 데이터를 수정하는 경우 = PATCH 사용
 	@RequestMapping(value="/{rno}",
 			method = { RequestMethod.PUT, RequestMethod.PATCH})
 	public ResponseEntity<String> update(@PathVariable("rno") Integer rno,
@@ -61,13 +63,33 @@ public class ReplyController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			vo.setBno(rno);
+			vo.setRno(rno);
+			service.modifyReply(vo);
+			
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(
 					e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
+		return entity;
+	}
+	
+	
+	@RequestMapping(value="/{rno}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("rno") Integer rno)	{
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.removeReply(rno);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 		return entity;
 	}
 	

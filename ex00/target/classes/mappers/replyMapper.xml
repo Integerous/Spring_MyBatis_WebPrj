@@ -3,14 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.ryemha.mapper.ReplyMapper">
+<mapper namespace="com.ryemha.mapper.ReplyMapper">
 
 	<select id="list" resultType="ReplyVO">
 		select
 		*
 		from
 		tbl_reply
-		where bnmo = #{bno}
+		where bno = #{bno}
 		order by rno desc
 	</select>
 	
@@ -20,8 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<update id="update">
-		update tbl_reply
-		set replytext= #{replytext}
+		update tbl_reply set replytext = #{replytext}
 		, updatedate = now()
 		where rno = #{rno}
 	</update>

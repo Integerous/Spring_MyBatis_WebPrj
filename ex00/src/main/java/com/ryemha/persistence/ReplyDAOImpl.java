@@ -15,7 +15,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static String namespace = "org.ryemha.mapper.ReplyMapper";
+	private static String namespace = "com.ryemha.mapper.ReplyMapper";
 	
 	
 	@Override
