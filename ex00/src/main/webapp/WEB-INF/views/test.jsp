@@ -21,7 +21,17 @@
 		/* @RestController의 경우 객체를 JSON 방식으로 전달하기 때문에 jQuery를 이용해서 호출할 때는
 		getJSON()을 이용한다. */
 		$.getJSON("/replies/all/" + bno, function(data){
+			
+			var str ="";
 			console.log(data.length);
+			
+			$(data).each(function(){
+				str += "<li data-rno='"+this.rno+"' class='replyLi'>"
+					+ this.rno + ":" + this.replytext
+					+ "</li>";
+			});
+			
+			$("#replies").html(str);
 		});
 	
 	
